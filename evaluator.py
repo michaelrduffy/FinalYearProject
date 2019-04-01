@@ -6,7 +6,7 @@ import pybullet_data
 import math
 import os
 import binascii
-import generator
+import redis
 #Recusively find links:
 # - Find previous [:
   # Go back through lstring
@@ -15,12 +15,16 @@ import generator
 #Programmatically find edges of blocks:
 #Origin + Width/2
 BRANCH_TERMINATORS = ['[', ']']
+r = redis.Redis(host='127.0.0.1', port=6379, db=0)
+resultsDb = redis.Redis(host='127.0.0.1', port=6379, db=1)
 
+key = -1
+obj = {}
 #robot = "F[F]"
 joints = []
 #robot = "F[F[F[F[F,,F[,,F,F]]]]]"
 
-robot = generator.generate(20)
+
 
 def translate_char(char, idx):
     cube = json.loads("""
@@ -85,6 +89,8 @@ def translate_char(char, idx):
         return 'Branch End'
 
 def make_joint(parent, child, num=0):
+    if num > 0:
+        num = 5%num
     joint = json.loads("""
       {
             "@name": "base_flap",
@@ -139,6 +145,7 @@ def make_joint(parent, child, num=0):
 #Lists of lists
 # New List on [], filled with children
 # Is this bad? - Probably
+cubeStartPos = [0,0,0]
 
 def generate_id():
     return binascii.b2a_hex(os.urandom(4))
@@ -190,19 +197,6 @@ def build_robot(lstring):
 
 links = []
 # x = [translate_char(char, i) for i, char in enumerate(robot) if char not in ['[',']']]
-x = build_robot(robot)
-
-out = { "robot" : {
-    "@name" : "paul",
-    "link" : links,
-    "joint" : joints
-}}
-
-parents = [x['parent']['@link'] for x in joints]
-children = [x['child']['@link'] for x in joints]
-
-with open("parserTest.urdf", "w") as f:
-    f.write(xml.unparse(out))
 
 def calcForceCos():
     val = math.cos((time.time())) * 10
@@ -218,29 +212,43 @@ def measureDistance(pos):
         sum += (math.fabs(pos[i] - cubeStartPos[i]))**2
     return math.sqrt(sum)
 
-speed = 10
+def evaluate(inputStr):
+    robot = inputStr
+    x = build_robot(robot)
 
-physicsClient = p.connect(p.GUI)#or p.DIRECT for non-graphical version
-p.setAdditionalSearchPath(pybullet_data.getDataPath()) #optionally
-p.setGravity(0,0,-2)
-planeId = p.loadURDF("plane.urdf")
-cubeStartPos = [0,0,0]
-cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
-boxId = p.loadURDF("parserTest.urdf",cubeStartPos, cubeStartOrientation)
-cubePos, cubeOrn = p.getBasePositionAndOrientation(boxId)
-print(cubePos,cubeOrn)
-for i in range (10000):
-    p.stepSimulation()
-    time.sleep(1./240.)
-    f = calcForce()
-    for j in range(p.getNumJoints(boxId)):
-        if j % 2 == 0:
-            f = calcForce()
-        else:
-            f = calcForceCos()
-        direction = speed if f >= 0 else  speed * -1
-        p.setJointMotorControl2(boxId, j, p.VELOCITY_CONTROL, targetVelocity=direction, force=math.fabs(f))
+    out = { "robot" : {
+        "@name" : "paul",
+        "link" : links,
+        "joint" : joints
+    }}
 
-cubePos, cubeOrn = p.getBasePositionAndOrientation(boxId)
-print measureDistance(cubePos)
-print(cubePos,cubeOrn)
+    parents = [x['parent']['@link'] for x in joints]
+    children = [x['child']['@link'] for x in joints]
+
+    with open("parserTest.urdf", "w") as f:
+        f.write(xml.unparse(out))
+
+    speed = 10
+
+    physicsClient = p.connect(p.DIRECT)#or p.DIRECT for non-graphical version
+    p.setAdditionalSearchPath(pybullet_data.getDataPath()) #optionally
+    p.setGravity(0,0,-2)
+    planeId = p.loadURDF("plane.urdf")
+    cubeStartPos = [0,0,0]
+    cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
+    boxId = p.loadURDF("parserTest.urdf",cubeStartPos, cubeStartOrientation)
+    cubePos, cubeOrn = p.getBasePositionAndOrientation(boxId)
+    for i in range (100):
+        p.stepSimulation()
+        f = calcForce()
+        for j in range(p.getNumJoints(boxId)):
+            if j % 2 == 0:
+                f = calcForce()
+            else:
+                f = calcForceCos()
+            direction = speed if f >= 0 else  speed * -1
+            p.setJointMotorControl2(boxId, j, p.VELOCITY_CONTROL, targetVelocity=direction, force=math.fabs(f))
+
+    cubePos, cubeOrn = p.getBasePositionAndOrientation(boxId)
+    result = measureDistance(cubePos)
+    return result

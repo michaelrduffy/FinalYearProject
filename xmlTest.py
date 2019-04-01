@@ -209,6 +209,12 @@ def calcForce():
     val = math.sin((time.time())) * 10
     return val
 
+def measureDistance(pos):
+    sum = 0
+    for i in range(len(pos)):
+        sum += (math.fabs(pos[i] - cubeStartPos[i]))**2
+    return math.sqrt(sum)
+
 speed = 10
 
 physicsClient = p.connect(p.GUI)#or p.DIRECT for non-graphical version
@@ -218,7 +224,9 @@ planeId = p.loadURDF("plane.urdf")
 cubeStartPos = [0,0,0]
 cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
 boxId = p.loadURDF("parserTest.urdf",cubeStartPos, cubeStartOrientation)
-for i in range (10000):
+cubePos, cubeOrn = p.getBasePositionAndOrientation(boxId)
+print(cubePos,cubeOrn)
+for i in range (10):
     p.stepSimulation()
     time.sleep(1./240.)
     f = calcForce()
@@ -231,4 +239,6 @@ for i in range (10000):
         p.setJointMotorControl2(boxId, j, p.VELOCITY_CONTROL, targetVelocity=direction, force=math.fabs(f))
 
 cubePos, cubeOrn = p.getBasePositionAndOrientation(boxId)
+print measureDistance(cubePos)
+import pdb; pdb.set_trace()
 print(cubePos,cubeOrn)

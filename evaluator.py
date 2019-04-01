@@ -6,6 +6,7 @@ import pybullet_data
 import math
 import os
 import binascii
+import generator
 #Recusively find links:
 # - Find previous [:
   # Go back through lstring
@@ -17,7 +18,9 @@ BRANCH_TERMINATORS = ['[', ']']
 
 #robot = "F[F]"
 joints = []
-robot = "F[F[F[F[F,,F[,,F,F]]]]]"
+#robot = "F[F[F[F[F,,F[,,F,F]]]]]"
+
+robot = generator.generate(20)
 
 def translate_char(char, idx):
     cube = json.loads("""
@@ -226,7 +229,7 @@ cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
 boxId = p.loadURDF("parserTest.urdf",cubeStartPos, cubeStartOrientation)
 cubePos, cubeOrn = p.getBasePositionAndOrientation(boxId)
 print(cubePos,cubeOrn)
-for i in range (10):
+for i in range (10000):
     p.stepSimulation()
     time.sleep(1./240.)
     f = calcForce()
@@ -240,5 +243,4 @@ for i in range (10):
 
 cubePos, cubeOrn = p.getBasePositionAndOrientation(boxId)
 print measureDistance(cubePos)
-import pdb; pdb.set_trace()
 print(cubePos,cubeOrn)

@@ -212,7 +212,7 @@ def measureDistance(pos):
         sum += (math.fabs(pos[i] - cubeStartPos[i]))**2
     return math.sqrt(sum)
 
-def evaluate(inputStr):
+def evaluate(inputStr, headless=True):
     robot = inputStr
     x = build_robot(robot)
 
@@ -229,8 +229,11 @@ def evaluate(inputStr):
         f.write(xml.unparse(out))
 
     speed = 10
-
-    physicsClient = p.connect(p.DIRECT)#or p.DIRECT for non-graphical version
+    physicsClient = None
+    if headless:
+        physicsClient = p.connect(p.DIRECT)
+    else:
+        physicsClient = p.connect(p.GUI)#or p.DIRECT for non-graphical version
     p.setAdditionalSearchPath(pybullet_data.getDataPath()) #optionally
     p.setGravity(0,0,-2)
     planeId = p.loadURDF("plane.urdf")
@@ -251,4 +254,6 @@ def evaluate(inputStr):
 
     cubePos, cubeOrn = p.getBasePositionAndOrientation(boxId)
     result = measureDistance(cubePos)
+    p.resetSimulation()
+    #p.disconnect()
     return result

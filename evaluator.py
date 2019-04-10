@@ -235,6 +235,7 @@ def evaluate(inputStr, headless=True):
     else:
         physicsClient = p.connect(p.GUI)#or p.DIRECT for non-graphical version
     p.setAdditionalSearchPath(pybullet_data.getDataPath()) #optionally
+    print physicsClient
     p.setGravity(0,0,-2)
     planeId = p.loadURDF("plane.urdf")
     cubeStartPos = [0,0,0]
@@ -255,5 +256,5 @@ def evaluate(inputStr, headless=True):
     cubePos, cubeOrn = p.getBasePositionAndOrientation(boxId)
     result = measureDistance(cubePos)
     p.resetSimulation()
-    #p.disconnect()
+    p.disconnect()
     return result

@@ -2,7 +2,7 @@
 import random
 import redis
 
-r = redis.Redis(host='127.0.0.1', port=6379, db=0)
+r = redis.Redis(host='192.168.0.9', port=6379, db=0)
 
 def findNextBracket(robot, start):
     return robot.find("[", start+1, len(robot))

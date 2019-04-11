@@ -7,6 +7,7 @@ import math
 import os
 import binascii
 import redis
+from elasticsearch import Elasticsearch
 #Recusively find links:
 # - Find previous [:
   # Go back through lstring
@@ -15,16 +16,30 @@ import redis
 #Programmatically find edges of blocks:
 #Origin + Width/2
 BRANCH_TERMINATORS = ['[', ']']
-r = redis.Redis(host='127.0.0.1', port=6379, db=0)
-resultsDb = redis.Redis(host='127.0.0.1', port=6379, db=1)
-
+r = redis.Redis(host='192.168.0.9', port=6379, db=0)
+resultsDb = redis.Redis(host='192.168.0.9', port=6379, db=1)
+es = Elasticsearch({'host':'192.168.0.9'})
+out = None
 key = -1
 obj = {}
 #robot = "F[F]"
-joints = []
+
 #robot = "F[F[F[F[F,,F[,,F,F]]]]]"
 
+def getKey():
+    k = None
+    while True:
+        k = r.randomkey()
+        obj = r.hgetall(k)
+        if obj['status'] == 'todo':
+            break
+    return k
 
+def getRobot(k):
+    #print "Key: "+k
+    obj = r.hgetall(k)
+    r.hset(k, "status", "inprogress")
+    return obj['string']
 
 def translate_char(char, idx):
     cube = json.loads("""
@@ -151,6 +166,8 @@ def generate_id():
     return binascii.b2a_hex(os.urandom(4))
 
 def build_robot(lstring):
+    joints = []
+    links = []
     def create_branch(subString, parentId):
         branch = []
         tempString = subString[:]
@@ -189,13 +206,13 @@ def build_robot(lstring):
         links.extend(branch)
         return branch
 
-    return create_branch(lstring, None)
+    branch = create_branch(lstring, None)
+    return {'branch' : branch, 'joints' : joints, 'links' : links}
     '''
         Iterate through list
         on [ create new list recurse until ]
     '''
 
-links = []
 # x = [translate_char(char, i) for i, char in enumerate(robot) if char not in ['[',']']]
 
 def calcForceCos():
@@ -215,7 +232,8 @@ def measureDistance(pos):
 def evaluate(inputStr, headless=True):
     robot = inputStr
     x = build_robot(robot)
-
+    joints = x['joints']
+    links = x['links']
     out = { "robot" : {
         "@name" : "paul",
         "link" : links,
@@ -224,6 +242,7 @@ def evaluate(inputStr, headless=True):
 
     parents = [x['parent']['@link'] for x in joints]
     children = [x['child']['@link'] for x in joints]
+    os.remove("parserTest.urdf")
 
     with open("parserTest.urdf", "w") as f:
         f.write(xml.unparse(out))
@@ -235,14 +254,22 @@ def evaluate(inputStr, headless=True):
     else:
         physicsClient = p.connect(p.GUI)#or p.DIRECT for non-graphical version
     p.setAdditionalSearchPath(pybullet_data.getDataPath()) #optionally
-    print physicsClient
     p.setGravity(0,0,-2)
-    planeId = p.loadURDF("plane.urdf")
+    planeId = None
+    try:
+        planeId = p.loadURDF("plane.urdf")
+    except:
+        print "Plane Failed"
+        import pdb; pdb.set_trace()
     cubeStartPos = [0,0,0]
     cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
-    boxId = p.loadURDF("parserTest.urdf",cubeStartPos, cubeStartOrientation)
+    boxId = None
+    try:
+        boxId = p.loadURDF("parserTest.urdf",cubeStartPos, cubeStartOrientation)
+    except:
+        import pdb; pdb.set_trace()
     cubePos, cubeOrn = p.getBasePositionAndOrientation(boxId)
-    for i in range (100):
+    for i in range (1000):
         p.stepSimulation()
         f = calcForce()
         for j in range(p.getNumJoints(boxId)):
@@ -258,3 +285,17 @@ def evaluate(inputStr, headless=True):
     p.resetSimulation()
     p.disconnect()
     return result
+
+while True:
+    if r.dbsize() != 0:
+        key = getKey()
+        robot = getRobot(key)
+        #print str(i+1) + " of " + str(generationSize)
+        print "Evaluating " + robot + "..."
+        try:
+            result = evaluate(robot)
+        except:
+            import pdb; pdb.set_trace()
+        resultsDb.hmset(key, {"string":robot, "result":result})
+        #r.hset(key, "status", "complete")
+        r.delete(key)

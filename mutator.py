@@ -1,8 +1,7 @@
 import redis
-import evaluator as e
 import random
 #Take in robot
-r = redis.Redis(host='127.0.0.1', port=6379, db=0)
+r = redis.Redis(host='192.168.0.9', port=6379, db=0)
 
 def generateKey():
     return r.dbsize()

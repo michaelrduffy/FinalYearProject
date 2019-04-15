@@ -17,6 +17,8 @@ from elasticsearch import Elasticsearch
 #Programmatically find edges of blocks:
 #Origin + Width/2
 BRANCH_TERMINATORS = ['[', ']']
+PARAM_STARTS = ['(', '{']
+PARAM_ENDS = [')', '}']
 
 r = redis.Redis(host='192.168.0.9', port=6379, db=0)
 resultsDb = redis.Redis(host='192.168.0.9', port=6379, db=1)
@@ -162,17 +164,51 @@ def build_robot(lstring):
         branch = []
         tempString = subString[:]
         childId = None
-        for i, char in enumerate(subString):
+        str_iter = enumerate(subString)
+        for i, char in str_iter:
             if char not in BRANCH_TERMINATORS:
                 if char == ',':
                     continue
                 childId = generate_id()
+                objParams = ''
+                jointParams = ''
+                print '\n'
+                print "SubString: " + subString
+                print "TempString: " + tempString
+                skip = 0
+                if subString[i+1] in PARAM_STARTS:
+                    endChar = PARAM_ENDS[PARAM_STARTS.index(subString[i+1])]
+                    end = subString.find(endChar, i+1)
+                    if endChar == '}':
+                        objParams = subString[i+2:end]
+                        skip = end
+                    elif endChar == ')':
+                        jointParams = subString[i+2:end]
+                        skip = end
+                    i = i+skip
+                    if subString[i+1] in PARAM_STARTS:
+                        endChar = PARAM_ENDS[PARAM_STARTS.index(subString[i+1])]
+                        end = subString.find(endChar, i+1)
+                        if endChar == '}':
+                            objParams = subString[i+2:end]
+                            skip = end
+                        elif endChar == ')':
+                            jointParams = subString[i+2:end]
+                            skip = end
+                        i = i+skip
+                objParams = objParams.split(' ') if objParams != '' else None
+                jointParams = jointParams.split(' ') if jointParams != '' else None
+
+                print objParams
+                print jointParams
                 temp = translate_char(char, childId)
                 branch.append(temp)
                 if parentId != None:
                     joints.append(make_joint(parentId, childId, temp, i))
                 if parentId == None:
                     parentId = childId
+                for foo in range(skip):
+                    str_iter.next()
             elif char == '[':
                 numOpen = 0
                 numClosed = 0

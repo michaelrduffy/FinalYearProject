@@ -29,10 +29,13 @@ def runId():
 def iterate(gen, Id):
     start = time.time()
     #Generate all creatures
-    for i in range(generationSize):
-        generator.generate(random.randrange(10))
+    if gen == 0:
+        for i in range(generationSize):
+            generator.generate(random.randrange(10))
     #Evaluate all creatures
     #Wait for evaluations
+    if len(r.keys()) != generationSize:
+        import pdb; pdb.set_trace()
     while len(r.keys()) != 0:
         time.sleep(5)
         print "Waiting for evaluation to finish"
@@ -50,15 +53,17 @@ def iterate(gen, Id):
         doc['generation'] = gen
         doc['runId'] = Id
         res = es.index(index='creature_index_test', doc_type='_doc', body=doc)
-    rankings = sorted(rankings)[generationSize/2:]
+    split = generationSize/2 if generationSize % 2 == 0 else (generationSize + 1)/2
+    rankings = sorted(rankings)[split:]
     print rankings
     nextGen = [sortedResults[rank] for rank in rankings]
     #Create next generation
-    # for x in nextGen:
-    #     mutator.mutate(x)
-    #     mutator.mutate(x)
+    if gen != numGenerations-1:
+        for x in nextGen:
+            mutator.mutate(x)
+            mutator.mutate(x)
 
-numGenerations = 50
+numGenerations = 10000
 generationSize = 100
 es = Elasticsearch(['192.168.0.9'])
 runId = runId()

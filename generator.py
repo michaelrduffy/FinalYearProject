@@ -16,8 +16,8 @@ def generate(n=10):
     startPos = 1
     for i in range(numLayers):
         x = random.randrange(100)
-        if x > 25:
-            if x > 50:
+        if x < 50:
+            if x < 25:
                 robot = robot[:startPos+1] + "F[]" + robot[startPos+1:]
                 startPos += 2
             else:

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <robot name="paul">
-	<link name="905f28be">
+	<link name="6a81c18c">
 		<collision>
 			<geometry>
 				<box size="0.2 0.2 0.2"></box>
@@ -22,7 +22,7 @@
 			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
 		</inertial>
 	</link>
-	<link name="e505a4d5">
+	<link name="4059a773">
 		<collision>
 			<geometry>
 				<box size="0.2 0.2 0.2"></box>
@@ -44,10 +44,70 @@
 			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
 		</inertial>
 	</link>
-	<joint name="e505a4d5905f28be" type="revolute">
+	<link name="8f912c0d">
+		<collision>
+			<geometry>
+				<box size="0.2 0.2 0.2"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.2 0.2 0.2"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="1"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="396733bf">
+		<collision>
+			<geometry>
+				<box size="0.2 0.2 0.2"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.2 0.2 0.2"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="1"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<joint name="396733bf4059a773" type="revolute">
 		<origin xyz="-0.2 0 0" rpy="0 0 0"></origin>
-		<parent link="e505a4d5"></parent>
-		<child link="905f28be"></child>
+		<parent link="396733bf"></parent>
+		<child link="4059a773"></child>
+		<limit velocity="0" lower="-1.9" upper="1.9" effort="0"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="396733bf8f912c0d" type="revolute">
+		<origin xyz="-0.2 0 0" rpy="0 0 0"></origin>
+		<parent link="396733bf"></parent>
+		<child link="8f912c0d"></child>
+		<limit velocity="0" lower="-1.9" upper="1.9" effort="0"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="8f912c0d6a81c18c" type="revolute">
+		<origin xyz="-0.2 0 0" rpy="0 0 0"></origin>
+		<parent link="8f912c0d"></parent>
+		<child link="6a81c18c"></child>
 		<limit velocity="0" lower="-1.9" upper="1.9" effort="0"></limit>
 		<type>revolute</type>
 		<axis xyz="0 0 1"></axis>

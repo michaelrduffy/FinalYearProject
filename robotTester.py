@@ -117,5 +117,5 @@ def evaluate(inputStr, headless=True):
 
     return result
 
-testRobot = 'F[F{1.0 2.0}(6.0 3.0)]'
+testRobot = 'F(3){2}[F{1.0 2.0}(6.0 3.0),,F[F(4.0){103}]]'
 evaluate(testRobot, False)

@@ -186,21 +186,23 @@ def build_robot(lstring):
                         jointParams = subString[i+2:end]
                         skip = end
                     i = i+skip
-                    if subString[i+1] in PARAM_STARTS:
-                        endChar = PARAM_ENDS[PARAM_STARTS.index(subString[i+1])]
-                        end = subString.find(endChar, i+1)
-                        if endChar == '}':
-                            objParams = subString[i+2:end]
-                            skip = end
-                        elif endChar == ')':
-                            jointParams = subString[i+2:end]
-                            skip = end
-                        i = i+skip
+                    if(len(subString)-1 > i+1):
+                        if subString[i+1] in PARAM_STARTS:
+                            endChar = PARAM_ENDS[PARAM_STARTS.index(subString[i+1])]
+                            end = subString.find(endChar, i+1)
+                            if endChar == '}':
+                                objParams = subString[i+2:end]
+                                skip = end
+                            elif endChar == ')':
+                                jointParams = subString[i+2:end]
+                                skip = end
+                            i = i+skip
                 objParams = objParams.split(' ') if objParams != '' else None
                 jointParams = jointParams.split(' ') if jointParams != '' else None
 
                 print objParams
                 print jointParams
+                print char
                 temp = translate_char(char, childId)
                 branch.append(temp)
                 if parentId != None:

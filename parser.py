@@ -27,7 +27,9 @@ out = None
 key = -1
 obj = {}
 
-def translate_char(char, idx):
+def translate_char(char, idx, params=None):
+    OBJ_PARAMS = ["x", "y", "z", "mass"]
+    initScale = 0.2
     cube = json.loads("""
           {
             "@name": "unset",
@@ -81,6 +83,27 @@ def translate_char(char, idx):
     if char == 'F':
         temp = cube.copy()
         temp["@name"] = idx
+
+        if params != None:
+            dimensions = [0.2,0.2,0.2]
+            for foo, p in enumerate(params):
+                toChange = OBJ_PARAMS[foo]
+                if toChange == "x":
+                    x = initScale * float(p)
+                    dimensions[0] = x
+                elif toChange == "y":
+                    y = initScale * float(p)
+                    dimensions[1] = y
+                elif toChange == "z":
+                    z = initScale * float(p)
+                    dimensions[2] = z
+                elif toChange == "mass":
+                    temp["inertial"]["mass"]["@value"] = float(p)
+            newDimensions = [str(d) for d in dimensions]
+            newDimensions = ' '.join(newDimensions)
+            temp["visual"]["geometry"]["box"]["@size"] = newDimensions
+            temp["collision"]["geometry"]["box"]["@size"] = newDimensions
+
         return temp
     elif char == '[':
         #Recursion!!?
@@ -89,9 +112,13 @@ def translate_char(char, idx):
         #End Recursion!!
         return 'Branch End'
 
-def make_joint(parent, child, childobj, num=0):
+def make_joint(parent, child, childobj, params=None, num=0):
     if num > 0:
         num = num % 6
+    JOINT_PARAMS = ["axis", "effort", "velocity", "upper", "lower"]
+    dimensions = childobj["collision"]["geometry"]["box"]["@size"].split(' ')
+    dimensions = [float(d) for d in dimensions]
+
     joint = json.loads("""
       {
             "@name": "base_flap",
@@ -123,28 +150,65 @@ def make_joint(parent, child, childobj, num=0):
     temp["parent"]["@link"] = parent
     temp["child"]["@link"] = child
     if num == 0:
-        origin = "0 0.2 0"
+        o = [0.0, 1.0, 0.0]
+        origin = str(dimensions[0]*o[0]) + ' ' + str(dimensions[1]*o[1]) + ' ' + str(dimensions[2]*o[2])
     elif num == 1:
-        origin = "0.2 0 0"
+        o = [1.0, 0.0, 0.0]
+        origin = str(dimensions[0]*o[0]) + ' ' + str(dimensions[1]*o[1]) + ' ' + str(dimensions[2]*o[2])
     elif num == 2:
-        origin = "0 -0.2 0"
+        o = [0.0, -1.0, 0.0]
+        origin = str(dimensions[0]*o[0]) + ' ' + str(dimensions[1]*o[1]) + ' ' + str(dimensions[2]*o[2])
     elif num == 3:
-        origin = "-0.2 0 0"
+        o = [-1.0, 0.0, 0.0]
+        origin = str(dimensions[0]*o[0]) + ' ' + str(dimensions[1]*o[1]) + ' ' + str(dimensions[2]*o[2])
     elif num == 4:
-        origin = "0 0 0.2"
+        o = [0.0, 0.0, 1.0]
+        origin = str(dimensions[0]*o[0]) + ' ' + str(dimensions[1]*o[1]) + ' ' + str(dimensions[2]*o[2])
         temp["axis"]['@xyz'] = "1 0 0"
-        neworig = "0 0 -0.1"
-        childobj["visual"]["origin"]["@xyz"] = neworig
-        childobj["collision"]["origin"]["@xyz"] = neworig
-        childobj["inertial"]["origin"]["@xyz"] = neworig
+        neworig = [0.0, 0.0, -0.5]
+        neworigin = str(dimensions[0]*neworig[0]) + ' ' + str(dimensions[1]*neworig[1]) + ' ' + str(dimensions[2]*neworig[2])
+        childobj["visual"]["origin"]["@xyz"] = neworigin
+        childobj["collision"]["origin"]["@xyz"] = neworigin
+        childobj["inertial"]["origin"]["@xyz"] = neworigin
     elif num == 5:
-        origin = "0 0 -0.2"
+        o = [0.0, 0.0, -1.0]
+        origin = str(dimensions[0]*o[0]) + ' ' + str(dimensions[1]*o[1]) + ' ' + str(dimensions[2]*o[2])
         temp["axis"]['@xyz'] = "1 0 0"
-        neworig = "0 0 0.1"
-        childobj["visual"]["origin"]["@xyz"] = neworig
-        childobj["collision"]["origin"]["@xyz"] = neworig
-        childobj["inertial"]["origin"]["@xyz"] = neworig
+        neworig = [0.0, 0.0, 0.5]
+        neworigin = str(dimensions[0]*neworig[0]) + ' ' + str(dimensions[1]*neworig[1]) + ' ' + str(dimensions[2]*neworig[2])
+        childobj["visual"]["origin"]["@xyz"] = neworigin
+        childobj["collision"]["origin"]["@xyz"] = neworigin
+        childobj["inertial"]["origin"]["@xyz"] = neworigin
     temp["origin"]["@xyz"] = origin
+    if params != None:
+        for idx, p in enumerate(params):
+            toChange = JOINT_PARAMS[idx]
+            if toChange == "axis":
+                #do thing
+                a = 1 + (int(p)% 7)
+                if a == 1:
+                    a = "0 0 1"
+                elif a == 2:
+                    a = "0 1 0"
+                elif a == 3:
+                    a = "0 1 1"
+                elif a == 4:
+                    a = "1 0 0"
+                elif a == 5:
+                    a = "1 0 1"
+                elif a == 6:
+                    a = "1 1 0"
+                elif a == 7:
+                    a = "1 1 1"
+                temp["axis"]["@xyz"] = a
+            elif toChange == "effort":
+                temp["limit"]["@effort"] = float(p)
+            elif toChange == "velocity":
+                temp["limit"]["@velocity"] = float(p)
+            elif toChange == "upper":
+                temp["limit"]["@upper"] = float(p)
+            elif toChange == "lower":
+                temp["limit"]["@lower"] = float(p)
     return temp
 
 #Read string char by char
@@ -203,10 +267,10 @@ def build_robot(lstring):
                 print objParams
                 print jointParams
                 print char
-                temp = translate_char(char, childId)
+                temp = translate_char(char, childId, params=objParams)
                 branch.append(temp)
                 if parentId != None:
-                    joints.append(make_joint(parentId, childId, temp, i))
+                    joints.append(make_joint(parentId, childId, temp, params=jointParams, num=i))
                 if parentId == None:
                     parentId = childId
                 for foo in range(skip):

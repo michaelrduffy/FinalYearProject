@@ -7,6 +7,8 @@ import math
 import os
 import binascii
 import redis
+import random
+from elasticsearch import Elasticsearch
 #Recusively find links:
 # - Find previous [:
   # Go back through lstring
@@ -15,16 +17,13 @@ import redis
 #Programmatically find edges of blocks:
 #Origin + Width/2
 BRANCH_TERMINATORS = ['[', ']']
-r = redis.Redis(host='127.0.0.1', port=6379, db=0)
-resultsDb = redis.Redis(host='127.0.0.1', port=6379, db=1)
 
+r = redis.Redis(host='192.168.0.9', port=6379, db=0)
+resultsDb = redis.Redis(host='192.168.0.9', port=6379, db=1)
+es = Elasticsearch({'host':'192.168.0.9'})
+out = None
 key = -1
 obj = {}
-#robot = "F[F]"
-joints = []
-#robot = "F[F[F[F[F,,F[,,F,F]]]]]"
-
-
 
 def translate_char(char, idx):
     cube = json.loads("""
@@ -88,9 +87,9 @@ def translate_char(char, idx):
         #End Recursion!!
         return 'Branch End'
 
-def make_joint(parent, child, num=0):
+def make_joint(parent, child, childobj, num=0):
     if num > 0:
-        num = 5%num
+        num = num % 6
     joint = json.loads("""
       {
             "@name": "base_flap",
@@ -131,12 +130,19 @@ def make_joint(parent, child, num=0):
         origin = "-0.2 0 0"
     elif num == 4:
         origin = "0 0 0.2"
-        #temp["axis"] = "0 1 0"
+        temp["axis"]['@xyz'] = "1 0 0"
+        neworig = "0 0 -0.1"
+        childobj["visual"]["origin"]["@xyz"] = neworig
+        childobj["collision"]["origin"]["@xyz"] = neworig
+        childobj["inertial"]["origin"]["@xyz"] = neworig
     elif num == 5:
         origin = "0 0 -0.2"
-        #temp["axis"] = "0 1 0"
+        temp["axis"]['@xyz'] = "1 0 0"
+        neworig = "0 0 0.1"
+        childobj["visual"]["origin"]["@xyz"] = neworig
+        childobj["collision"]["origin"]["@xyz"] = neworig
+        childobj["inertial"]["origin"]["@xyz"] = neworig
     temp["origin"]["@xyz"] = origin
-
     return temp
 
 #Read string char by char
@@ -145,12 +151,13 @@ def make_joint(parent, child, num=0):
 #Lists of lists
 # New List on [], filled with children
 # Is this bad? - Probably
-cubeStartPos = [0,0,0]
 
 def generate_id():
     return binascii.b2a_hex(os.urandom(4))
 
 def build_robot(lstring):
+    joints = []
+    links = []
     def create_branch(subString, parentId):
         branch = []
         tempString = subString[:]
@@ -163,7 +170,7 @@ def build_robot(lstring):
                 temp = translate_char(char, childId)
                 branch.append(temp)
                 if parentId != None:
-                    joints.append(make_joint(parentId, childId, i))
+                    joints.append(make_joint(parentId, childId, temp, i))
                 if parentId == None:
                     parentId = childId
             elif char == '[':
@@ -189,33 +196,14 @@ def build_robot(lstring):
         links.extend(branch)
         return branch
 
-    return create_branch(lstring, None)
+    branch = create_branch(lstring, None)
+    x = {'branch' : branch, 'joints' : joints, 'links' : links}
     '''
         Iterate through list
         on [ create new list recurse until ]
     '''
-
-links = []
-# x = [translate_char(char, i) for i, char in enumerate(robot) if char not in ['[',']']]
-
-def calcForceCos():
-    val = math.cos((time.time())) * 10
-    return val
-
-def calcForce():
-    val = math.sin((time.time())) * 10
-    return val
-
-def measureDistance(pos):
-    sum = 0
-    for i in range(len(pos)):
-        sum += (math.fabs(pos[i] - cubeStartPos[i]))**2
-    return math.sqrt(sum)
-
-def evaluate(inputStr, headless=True):
-    robot = inputStr
-    x = build_robot(robot)
-
+    joints = x['joints']
+    links = x['links']
     out = { "robot" : {
         "@name" : "paul",
         "link" : links,
@@ -224,37 +212,13 @@ def evaluate(inputStr, headless=True):
 
     parents = [x['parent']['@link'] for x in joints]
     children = [x['child']['@link'] for x in joints]
+    try:
+        os.remove("robot.urdf")
+    except:
+        print "robot.urdf does not exist"
+    with open("robot.urdf", "w") as f:
+        f.write(xml.unparse(out, pretty=True))
 
-    with open("parserTest.urdf", "w") as f:
-        f.write(xml.unparse(out))
+    return "robot.urdf"
 
-    speed = 10
-    physicsClient = None
-    if headless:
-        physicsClient = p.connect(p.DIRECT)
-    else:
-        physicsClient = p.connect(p.GUI)#or p.DIRECT for non-graphical version
-    p.setAdditionalSearchPath(pybullet_data.getDataPath()) #optionally
-    print physicsClient
-    p.setGravity(0,0,-2)
-    planeId = p.loadURDF("plane.urdf")
-    cubeStartPos = [0,0,0]
-    cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
-    boxId = p.loadURDF("parserTest.urdf",cubeStartPos, cubeStartOrientation)
-    cubePos, cubeOrn = p.getBasePositionAndOrientation(boxId)
-    for i in range (100):
-        p.stepSimulation()
-        f = calcForce()
-        for j in range(p.getNumJoints(boxId)):
-            if j % 2 == 0:
-                f = calcForce()
-            else:
-                f = calcForceCos()
-            direction = speed if f >= 0 else  speed * -1
-            p.setJointMotorControl2(boxId, j, p.VELOCITY_CONTROL, targetVelocity=direction, force=math.fabs(f))
-
-    cubePos, cubeOrn = p.getBasePositionAndOrientation(boxId)
-    result = measureDistance(cubePos)
-    p.resetSimulation()
-    p.disconnect()
-    return result
+# x = [translate_char(char, i) for i, char in enumerate(robot) if char not in ['[',']']]

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="paul">
+	<link name="fa1cb030">
+		<collision>
+			<geometry>
+				<box size="0.2 0.2 0.2"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.2 0.2 0.2"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="1"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="331e4408">
+		<collision>
+			<geometry>
+				<box size="0.2 0.2 0.2"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.2 0.2 0.2"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="1"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<joint name="331e4408fa1cb030" type="revolute">
+		<origin xyz="0 0.2 0" rpy="0 0 0"></origin>
+		<parent link="331e4408"></parent>
+		<child link="fa1cb030"></child>
+		<limit velocity="0" lower="-1.9" upper="1.9" effort="0"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+</robot>

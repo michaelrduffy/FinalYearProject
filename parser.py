@@ -20,9 +20,9 @@ BRANCH_TERMINATORS = ['[', ']']
 PARAM_STARTS = ['(', '{']
 PARAM_ENDS = [')', '}']
 
-r = redis.Redis(host='192.168.0.9', port=6379, db=0)
-resultsDb = redis.Redis(host='192.168.0.9', port=6379, db=1)
-es = Elasticsearch({'host':'192.168.0.9'})
+r = redis.Redis(host='192.168.1.16', port=6379, db=0)
+resultsDb = redis.Redis(host='192.168.1.16', port=6379, db=1)
+es = Elasticsearch({'host':'192.168.1.16'})
 out = None
 key = -1
 obj = {}

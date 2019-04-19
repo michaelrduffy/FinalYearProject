@@ -65,10 +65,10 @@ def iterate(gen, Id):
 
 numGenerations = 10000
 generationSize = 100
-es = Elasticsearch(['192.168.1.16'])
+es = Elasticsearch(['192.168.0.9'])
 runId = runId()
-r = redis.Redis(host='192.168.1.16', port=6379, db=0)
-resultsDb = redis.Redis(host='192.168.1.16', port=6379, db=1)
+r = redis.Redis(host='192.168.0.9', port=6379, db=0)
+resultsDb = redis.Redis(host='192.168.0.9', port=6379, db=1)
 print "RunId: " +runId
 r.flushdb()
 resultsDb.flushdb()

@@ -20,9 +20,9 @@ BRANCH_TERMINATORS = ['[', ']']
 PARAM_STARTS = ['(', '{']
 PARAM_ENDS = [')', '}']
 
-r = redis.Redis(host='192.168.1.16', port=6379, db=0)
-resultsDb = redis.Redis(host='192.168.1.16', port=6379, db=1)
-es = Elasticsearch({'host':'192.168.1.16'})
+r = redis.Redis(host='192.168.0.9', port=6379, db=0)
+resultsDb = redis.Redis(host='192.168.0.9', port=6379, db=1)
+es = Elasticsearch({'host':'192.168.0.9'})
 out = None
 key = -1
 obj = {}
@@ -185,7 +185,7 @@ def make_joint(parent, child, childobj, params=None, num=0):
             toChange = JOINT_PARAMS[idx]
             if toChange == "axis":
                 #do thing
-                a = 1 + (int(p)% 7)
+                a = 1 + (int(math.floor(float(p)))% 7)
                 if a == 1:
                     a = "0 0 1"
                 elif a == 2:
@@ -236,11 +236,11 @@ def build_robot(lstring):
                 childId = generate_id()
                 objParams = ''
                 jointParams = ''
-                print '\n'
-                print "SubString: " + subString
-                print "TempString: " + tempString
+                # print '\n'
+                # print "SubString: " + subString
+                # print "TempString: " + tempString
                 skip = 0
-                if subString[i+1] in PARAM_STARTS:
+                if len(subString)-1 > i+1 and subString[i+1] in PARAM_STARTS:
                     endChar = PARAM_ENDS[PARAM_STARTS.index(subString[i+1])]
                     end = subString.find(endChar, i+1)
                     if endChar == '}':
@@ -264,9 +264,9 @@ def build_robot(lstring):
                 objParams = objParams.split(' ') if objParams != '' else None
                 jointParams = jointParams.split(' ') if jointParams != '' else None
 
-                print objParams
-                print jointParams
-                print char
+                # print objParams
+                # print jointParams
+                # print char
                 temp = translate_char(char, childId, params=objParams)
                 branch.append(temp)
                 if parentId != None:
@@ -317,7 +317,7 @@ def build_robot(lstring):
     try:
         os.remove("robot.urdf")
     except:
-        print "robot.urdf does not exist"
+         print "robot.urdf does not exist"
     with open("robot.urdf", "w") as f:
         f.write(xml.unparse(out, pretty=True))
 

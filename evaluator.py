@@ -18,9 +18,9 @@ from elasticsearch import Elasticsearch
 #Programmatically find edges of blocks:
 #Origin + Width/2
 BRANCH_TERMINATORS = ['[', ']']
-r = redis.Redis(host='192.168.1.16', port=6379, db=0)
-resultsDb = redis.Redis(host='192.168.1.16', port=6379, db=1)
-es = Elasticsearch({'host':'192.168.1.16'})
+r = redis.Redis(host='192.168.0.9', port=6379, db=0)
+resultsDb = redis.Redis(host='192.168.0.9', port=6379, db=1)
+es = Elasticsearch({'host':'192.168.9.0'})
 out = None
 key = -1
 obj = {}

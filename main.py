@@ -23,6 +23,11 @@ def getRobot(k):
     r.hset(k, "status", "inprogress")
     return obj['string']
 
+
+def generateKey():
+    return r.dbsize()
+
+
 def runId():
     return ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(16))
 
@@ -60,8 +65,11 @@ def iterate(gen, Id):
     #Create next generation
     if gen != numGenerations-1:
         for x in nextGen:
-            mutator.mutate(x)
-            mutator.mutate(x)
+            robotDict = {"string": mutator.update(x), "status":"todo"}
+            r.hmset(generateKey(), robotDict)
+            robotDict = {"string": mutator.update(x), "status":"todo"}
+            r.hmset(generateKey(), robotDict)
+
 
 numGenerations = 10000
 generationSize = 100

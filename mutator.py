@@ -133,7 +133,6 @@ def deserialise(robot):
 
 #Identify genes?
 def mutate(robot):
-
     if robot.objParams != None:
         temp = robot.objParams
         newParams = []
@@ -170,17 +169,18 @@ def mutate(robot):
                 foo = deserialise(child)
                 bar = mutate(foo)
                 newChildren.append(bar)
+                if random.randrange(100) > 60:
+                    newChildren.append(',')
             else:
                 newChildren.append(',')
         robot.setChildren(''.join(newChildren))
     elif random.randrange(100) > 60:
-        robot.setChildren('F')
+        if random.randrange(100) > 50:
+            robot.setChildren('F')
+        else:
+            robot.setChildren(',')
     return robot.toString()
 
-testStr = 'F{6.0 3.2}(1.0)[F{0.1 0.0}(1.1)[F[F]],,,F[F{0.1}(1 2 3),,,F]]'
-genome = deserialise(testStr)
-print mutate(genome)
-
-#     robotDict = {"string": subString, "status":"todo"}
-#     # r.hmset(generateKey(), robotDict)
-#     return robot
+def update(robot):
+    r = deserialise(robot)
+    return mutate(r)

@@ -46,7 +46,7 @@ def translate_char(char, idx, params=None):
               "material": {
                 "@name": "white",
                 "color": {
-                  "@rgba": "1 1.0 1.0 1.0"
+                  "@rgba": "1.0 1.0 1.0 1.0"
                 }
               }
             },
@@ -231,7 +231,8 @@ def build_robot(lstring):
         str_iter = enumerate(subString)
         for i, char in str_iter:
             if char not in BRANCH_TERMINATORS:
-                if char == ',':
+
+                if char != 'F':
                     continue
                 childId = generate_id()
                 objParams = ''
@@ -270,11 +271,16 @@ def build_robot(lstring):
                 temp = translate_char(char, childId, params=objParams)
                 branch.append(temp)
                 if parentId != None:
+
                     joints.append(make_joint(parentId, childId, temp, params=jointParams, num=i))
                 if parentId == None:
                     parentId = childId
                 for foo in range(skip):
-                    str_iter.next()
+                    try:
+                        str_iter.next()
+                    except StopIteration:
+                        pass
+
             elif char == '[':
                 numOpen = 0
                 numClosed = 0

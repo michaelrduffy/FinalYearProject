@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <robot name="paul">
-	<link name="67b3bdd6">
+	<link name="bb90fee0">
 		<collision>
 			<geometry>
 				<box size="0.2 0.2 0.2"></box>
@@ -22,16 +22,38 @@
 			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
 		</inertial>
 	</link>
-	<link name="a9a6fc60">
+	<link name="0cdc028b">
 		<collision>
 			<geometry>
-				<box size="0.2 0.2 0.2"></box>
+				<box size="0.0843382441056 0.0167173569684 0.2"></box>
+			</geometry>
+			<origin xyz="0.0 0.0 -0.1" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.0843382441056 0.0167173569684 0.2"></box>
+			</geometry>
+			<origin xyz="0.0 0.0 -0.1" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0.0 0.0 -0.1" rpy="0 0 0"></origin>
+			<mass value="1"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="591f5e18">
+		<collision>
+			<geometry>
+				<box size="0.131795017515 0.0212940119294 0.2"></box>
 			</geometry>
 			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
 		</collision>
 		<visual>
 			<geometry>
-				<box size="0.2 0.2 0.2"></box>
+				<box size="0.131795017515 0.0212940119294 0.2"></box>
 			</geometry>
 			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
 			<material name="white">
@@ -44,38 +66,16 @@
 			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
 		</inertial>
 	</link>
-	<link name="8bf16970">
+	<link name="0443cef8">
 		<collision>
 			<geometry>
-				<box size="0.02 0.0 0.2"></box>
-			</geometry>
-			<origin xyz="0.0 0.0 0.1" rpy="0 0 0"></origin>
-		</collision>
-		<visual>
-			<geometry>
-				<box size="0.02 0.0 0.2"></box>
-			</geometry>
-			<origin xyz="0.0 0.0 0.1" rpy="0 0 0"></origin>
-			<material name="white">
-				<color rgba="1 1.0 1.0 1.0"></color>
-			</material>
-		</visual>
-		<inertial>
-			<origin xyz="0.0 0.0 0.1" rpy="0 0 0"></origin>
-			<mass value="1"></mass>
-			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
-		</inertial>
-	</link>
-	<link name="1b3c5158">
-		<collision>
-			<geometry>
-				<box size="1.2 0.64 0.2"></box>
+				<box size="0.0132225166836 0.0409653215416 0.0529219438702"></box>
 			</geometry>
 			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
 		</collision>
 		<visual>
 			<geometry>
-				<box size="1.2 0.64 0.2"></box>
+				<box size="0.0132225166836 0.0409653215416 0.0529219438702"></box>
 			</geometry>
 			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
 			<material name="white">
@@ -84,30 +84,1110 @@
 		</visual>
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 0 0"></origin>
-			<mass value="1"></mass>
+			<mass value="0.587377537087"></mass>
 			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
 		</inertial>
 	</link>
-	<joint name="1b3c51588bf16970" type="revolute">
-		<origin xyz="0.0 0.0 -0.2" rpy="0 0 0"></origin>
-		<parent link="1b3c5158"></parent>
-		<child link="8bf16970"></child>
-		<limit velocity="0" lower="-1.9" upper="1.9" effort="0"></limit>
-		<type>revolute</type>
-		<axis xyz="0 1 0"></axis>
-	</joint>
-	<joint name="8bf16970a9a6fc60" type="revolute">
-		<origin xyz="0.0 0.2 0.0" rpy="0 0 0"></origin>
-		<parent link="8bf16970"></parent>
-		<child link="a9a6fc60"></child>
-		<limit velocity="0" lower="-1.9" upper="1.9" effort="0"></limit>
+	<link name="726e66ea">
+		<collision>
+			<geometry>
+				<box size="0.0695114151006 0.110189683494 0.0154031405075"></box>
+			</geometry>
+			<origin xyz="0.0 0.0 0.00770157025375" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.0695114151006 0.110189683494 0.0154031405075"></box>
+			</geometry>
+			<origin xyz="0.0 0.0 0.00770157025375" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0.0 0.0 0.00770157025375" rpy="0 0 0"></origin>
+			<mass value="0.670081779255"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="982855a3">
+		<collision>
+			<geometry>
+				<box size="0.13318379243 0.115377989296 0.188340843347"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.13318379243 0.115377989296 0.188340843347"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.303939301494"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="954daca0">
+		<collision>
+			<geometry>
+				<box size="0.0265839089966 0.0677195858122 0.106725024906"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.0265839089966 0.0677195858122 0.106725024906"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.603282360309"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="9cdb5009">
+		<collision>
+			<geometry>
+				<box size="0.0480505025842 0.113004653739 0.161601279303"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.0480505025842 0.113004653739 0.161601279303"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.629287541202"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="105cdbe8">
+		<collision>
+			<geometry>
+				<box size="0.199247555533 0.236723511144 0.089660214895"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.199247555533 0.236723511144 0.089660214895"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.147974814275"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="d78aac32">
+		<collision>
+			<geometry>
+				<box size="0.16721342478 0.072733274844 0.0716992098832"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.16721342478 0.072733274844 0.0716992098832"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.302100867337"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="275c27f4">
+		<collision>
+			<geometry>
+				<box size="0.128272554227 0.195171391337 0.151876556298"></box>
+			</geometry>
+			<origin xyz="0.0 0.0 0.075938278149" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.128272554227 0.195171391337 0.151876556298"></box>
+			</geometry>
+			<origin xyz="0.0 0.0 0.075938278149" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0.0 0.0 0.075938278149" rpy="0 0 0"></origin>
+			<mass value="0.341980497439"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="64c6f495">
+		<collision>
+			<geometry>
+				<box size="0.45040473831 0.067132646337 0.0282919119518"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.45040473831 0.067132646337 0.0282919119518"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.215708115042"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="9b5bd92e">
+		<collision>
+			<geometry>
+				<box size="0.0724202115472 0.0138951874763 0.0271435728634"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.0724202115472 0.0138951874763 0.0271435728634"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.583002862284"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="83cccbd2">
+		<collision>
+			<geometry>
+				<box size="0.0652540005542 0.107914655121 0.0258191701778"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.0652540005542 0.107914655121 0.0258191701778"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.996296461608"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="7d2f91e4">
+		<collision>
+			<geometry>
+				<box size="0.110378961481 0.0227442211358 0.170972890682"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.110378961481 0.0227442211358 0.170972890682"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.424167385001"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="7890965f">
+		<collision>
+			<geometry>
+				<box size="0.180373033082 0.10029180219 0.048116750126"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.180373033082 0.10029180219 0.048116750126"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.647623665562"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="70a813a7">
+		<collision>
+			<geometry>
+				<box size="0.0977121751532 0.0910591573796 0.0436593132692"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.0977121751532 0.0910591573796 0.0436593132692"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="1.03861954971"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="3da6150c">
+		<collision>
+			<geometry>
+				<box size="0.0108870534431 0.0444796676004 0.145823653908"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.0108870534431 0.0444796676004 0.145823653908"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.0650655309281"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="87d7940f">
+		<collision>
+			<geometry>
+				<box size="0.0361416689892 0.0080074759284 0.111973493679"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.0361416689892 0.0080074759284 0.111973493679"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.471939396325"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="05fb6450">
+		<collision>
+			<geometry>
+				<box size="0.100104259793 0.160221870822 0.0277337756608"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.100104259793 0.160221870822 0.0277337756608"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.773851986496"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="e68ff6a4">
+		<collision>
+			<geometry>
+				<box size="0.181134077942 0.106878170724 0.0349744380616"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.181134077942 0.106878170724 0.0349744380616"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.205619450237"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="413041c7">
+		<collision>
+			<geometry>
+				<box size="0.138968980934 0.0184764451506 0.056534615929"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.138968980934 0.0184764451506 0.056534615929"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.376307739183"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="d63c789b">
+		<collision>
+			<geometry>
+				<box size="0.373904167994 0.000351354843484 0.0150291142307"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.373904167994 0.000351354843484 0.0150291142307"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.5931795356"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="6ec480c8">
+		<collision>
+			<geometry>
+				<box size="0.0327007552234 0.296890064168 0.42189709814"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.0327007552234 0.296890064168 0.42189709814"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.0599475888866"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="b5190963">
+		<collision>
+			<geometry>
+				<box size="0.0501145990306 0.00454454445846 0.039425262923"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.0501145990306 0.00454454445846 0.039425262923"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.263191333129"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="ea98e739">
+		<collision>
+			<geometry>
+				<box size="0.0741834445328 0.0549607904578 0.00177249207438"></box>
+			</geometry>
+			<origin xyz="0.0 0.0 -0.00088624603719" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.0741834445328 0.0549607904578 0.00177249207438"></box>
+			</geometry>
+			<origin xyz="0.0 0.0 -0.00088624603719" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0.0 0.0 -0.00088624603719" rpy="0 0 0"></origin>
+			<mass value="0.162360917893"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="0b5a6eef">
+		<collision>
+			<geometry>
+				<box size="0.0808027819192 0.227467787174 0.131840645988"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.0808027819192 0.227467787174 0.131840645988"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.17795049276"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="4b7a5ff1">
+		<collision>
+			<geometry>
+				<box size="0.143559181786 0.0469090906098 0.24862996467"></box>
+			</geometry>
+			<origin xyz="0.0 0.0 0.124314982335" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.143559181786 0.0469090906098 0.24862996467"></box>
+			</geometry>
+			<origin xyz="0.0 0.0 0.124314982335" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0.0 0.0 0.124314982335" rpy="0 0 0"></origin>
+			<mass value="0.0245540538144"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="377fa558">
+		<collision>
+			<geometry>
+				<box size="0.161215684376 0.0563476789502 0.00550104180834"></box>
+			</geometry>
+			<origin xyz="0.0 0.0 -0.00275052090417" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.161215684376 0.0563476789502 0.00550104180834"></box>
+			</geometry>
+			<origin xyz="0.0 0.0 -0.00275052090417" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0.0 0.0 -0.00275052090417" rpy="0 0 0"></origin>
+			<mass value="0.438689538383"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="14945161">
+		<collision>
+			<geometry>
+				<box size="0.0610886104192 0.00027782406243 0.227622919786"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.0610886104192 0.00027782406243 0.227622919786"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.0725935453546"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="85decfd8">
+		<collision>
+			<geometry>
+				<box size="0.0875968007704 0.0582290253912 0.125876742615"></box>
+			</geometry>
+			<origin xyz="0.0 0.0 0.0629383713075" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.0875968007704 0.0582290253912 0.125876742615"></box>
+			</geometry>
+			<origin xyz="0.0 0.0 0.0629383713075" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0.0 0.0 0.0629383713075" rpy="0 0 0"></origin>
+			<mass value="0.506951091618"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="e8e5e8db">
+		<collision>
+			<geometry>
+				<box size="0.495158420822 0.0764411391882 0.00885682867066"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.495158420822 0.0764411391882 0.00885682867066"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.228889692784"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="f3d7be28">
+		<collision>
+			<geometry>
+				<box size="0.0188345583162 0.0136163199279 0.158944847299"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.0188345583162 0.0136163199279 0.158944847299"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.0840733723647"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="18b29c49">
+		<collision>
+			<geometry>
+				<box size="0.0707930132382 0.246813578586 0.48747369748"></box>
+			</geometry>
+			<origin xyz="0.0 0.0 0.24373684874" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.0707930132382 0.246813578586 0.48747369748"></box>
+			</geometry>
+			<origin xyz="0.0 0.0 0.24373684874" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0.0 0.0 0.24373684874" rpy="0 0 0"></origin>
+			<mass value="0.594868004824"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="3156b1b7">
+		<collision>
+			<geometry>
+				<box size="0.0679387894876 0.00957289119122 0.020176916447"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.0679387894876 0.00957289119122 0.020176916447"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.316442532757"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="30fc0f2e">
+		<collision>
+			<geometry>
+				<box size="0.033952604541 0.0156937658866 0.0510297654906"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.033952604541 0.0156937658866 0.0510297654906"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="1.34691255385"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="3691be7d">
+		<collision>
+			<geometry>
+				<box size="0.111908339714 0.00513391865028 0.0450365789612"></box>
+			</geometry>
+			<origin xyz="0.0 0.0 0.0225182894806" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.111908339714 0.00513391865028 0.0450365789612"></box>
+			</geometry>
+			<origin xyz="0.0 0.0 0.0225182894806" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0.0 0.0 0.0225182894806" rpy="0 0 0"></origin>
+			<mass value="0.0868762881569"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="c9507b8b">
+		<collision>
+			<geometry>
+				<box size="0.0462533670282 0.0629544528298 0.0436530380084"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.0462533670282 0.0629544528298 0.0436530380084"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.111455865671"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="6842db81">
+		<collision>
+			<geometry>
+				<box size="1.24897414772 3.0449518764 3.37554395198"></box>
+			</geometry>
+			<origin xyz="0.0 0.0 -1.68777197599" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="1.24897414772 3.0449518764 3.37554395198"></box>
+			</geometry>
+			<origin xyz="0.0 0.0 -1.68777197599" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0.0 0.0 -1.68777197599" rpy="0 0 0"></origin>
+			<mass value="0.0347608842593"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<link name="0f457723">
+		<collision>
+			<geometry>
+				<box size="0.232578626892 0.0340881376466 0.0486208371476"></box>
+			</geometry>
+			<origin xyz="0 0.0 0.0" rpy="0 0 0"></origin>
+		</collision>
+		<visual>
+			<geometry>
+				<box size="0.232578626892 0.0340881376466 0.0486208371476"></box>
+			</geometry>
+			<origin xyz="0 0.0 0" rpy="0 0 0"></origin>
+			<material name="white">
+				<color rgba="1 1.0 1.0 1.0"></color>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"></origin>
+			<mass value="0.0562839946932"></mass>
+			<inertia ixy="0.0" ixx="0.000" ixz="0.0" iyz="0.0" iyy="0.000" izz="0.0"></inertia>
+		</inertial>
+	</link>
+	<joint name="0f4577236842db81" type="revolute">
+		<origin xyz="0.0 0.0 3.37554395198" rpy="0 0 0"></origin>
+		<parent link="0f457723"></parent>
+		<child link="6842db81"></child>
+		<limit velocity="0.282177734903" lower="-1.9" upper="0.0612437944803" effort="0.341324818291"></limit>
 		<type>revolute</type>
 		<axis xyz="0 0 1"></axis>
 	</joint>
-	<joint name="a9a6fc6067b3bdd6" type="revolute">
+	<joint name="6842db81c9507b8b" type="revolute">
+		<origin xyz="-0.0462533670282 0.0 0.0" rpy="0 0 0"></origin>
+		<parent link="6842db81"></parent>
+		<child link="c9507b8b"></child>
+		<limit velocity="0.246351297771" lower="-1.9" upper="0.505516101845" effort="0.12045645513"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="c9507b8b3691be7d" type="revolute">
+		<origin xyz="0.0 0.0 -0.0450365789612" rpy="0 0 0"></origin>
+		<parent link="c9507b8b"></parent>
+		<child link="3691be7d"></child>
+		<limit velocity="0.358481678273" lower="-1.9" upper="0.379670717296" effort="0.0489190980108"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="3691be7d30fc0f2e" type="revolute">
+		<origin xyz="0.0 -0.0156937658866 0.0" rpy="0 0 0"></origin>
+		<parent link="3691be7d"></parent>
+		<child link="30fc0f2e"></child>
+		<limit velocity="0.11998356245" lower="-1.9" upper="0.582318646095" effort="0.241636866455"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="30fc0f2e3156b1b7" type="revolute">
+		<origin xyz="0.0 0.00957289119122 0.0" rpy="0 0 0"></origin>
+		<parent link="30fc0f2e"></parent>
+		<child link="3156b1b7"></child>
+		<limit velocity="0.383825736981" lower="-1.9" upper="0.136287542501" effort="0.542107316538"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="3156b1b718b29c49" type="revolute">
+		<origin xyz="0.0 0.0 -0.48747369748" rpy="0 0 0"></origin>
+		<parent link="3156b1b7"></parent>
+		<child link="18b29c49"></child>
+		<limit velocity="0.258218931186" lower="-1.9" upper="0.0454098009483" effort="0.0261534036422"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="18b29c49f3d7be28" type="revolute">
+		<origin xyz="-0.0188345583162 0.0 0.0" rpy="0 0 0"></origin>
+		<parent link="18b29c49"></parent>
+		<child link="f3d7be28"></child>
+		<limit velocity="1.8348265774" lower="-1.9" upper="0.860712528875" effort="0.0433088652767"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="f3d7be28e8e5e8db" type="revolute">
+		<origin xyz="0.0 -0.0764411391882 0.0" rpy="0 0 0"></origin>
+		<parent link="f3d7be28"></parent>
+		<child link="e8e5e8db"></child>
+		<limit velocity="0.0557960429855" lower="-1.9" upper="0.40624931156" effort="2.69866842273"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="e8e5e8db85decfd8" type="revolute">
+		<origin xyz="0.0 0.0 -0.125876742615" rpy="0 0 0"></origin>
+		<parent link="e8e5e8db"></parent>
+		<child link="85decfd8"></child>
+		<limit velocity="0.786927801371" lower="-1.9" upper="1.039609111" effort="0.274750256226"></limit>
+		<type>revolute</type>
+		<axis xyz="0 1 0"></axis>
+	</joint>
+	<joint name="85decfd814945161" type="revolute">
+		<origin xyz="0.0610886104192 0.0 0.0" rpy="0 0 0"></origin>
+		<parent link="85decfd8"></parent>
+		<child link="14945161"></child>
+		<limit velocity="0.0450838143262" lower="-1.9" upper="0.102064901649" effort="0.422151747483"></limit>
+		<type>revolute</type>
+		<axis xyz="0 1 0"></axis>
+	</joint>
+	<joint name="14945161377fa558" type="revolute">
+		<origin xyz="0.0 0.0 0.00550104180834" rpy="0 0 0"></origin>
+		<parent link="14945161"></parent>
+		<child link="377fa558"></child>
+		<limit velocity="0.208178333362" lower="-1.9" upper="0.087020882853" effort="0.201760570192"></limit>
+		<type>revolute</type>
+		<axis xyz="0 1 0"></axis>
+	</joint>
+	<joint name="377fa5584b7a5ff1" type="revolute">
+		<origin xyz="0.0 0.0 -0.24862996467" rpy="0 0 0"></origin>
+		<parent link="377fa558"></parent>
+		<child link="4b7a5ff1"></child>
+		<limit velocity="0.82305196682" lower="-1.9" upper="1.19717226534" effort="0.438887762208"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="4b7a5ff10b5a6eef" type="revolute">
+		<origin xyz="0.0 -0.227467787174 0.0" rpy="0 0 0"></origin>
+		<parent link="4b7a5ff1"></parent>
+		<child link="0b5a6eef"></child>
+		<limit velocity="0.713738375051" lower="-1.9" upper="0.43609175347" effort="0.350386261313"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="0b5a6eefea98e739" type="revolute">
+		<origin xyz="0.0 0.0 0.00177249207438" rpy="0 0 0"></origin>
+		<parent link="0b5a6eef"></parent>
+		<child link="ea98e739"></child>
+		<limit velocity="1.90733384287" lower="-1.9" upper="0.812217877935" effort="0.155820395792"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="ea98e739b5190963" type="revolute">
+		<origin xyz="-0.0501145990306 0.0 0.0" rpy="0 0 0"></origin>
+		<parent link="ea98e739"></parent>
+		<child link="b5190963"></child>
+		<limit velocity="0.412559300874" lower="-1.9" upper="0.837651867618" effort="0.93982556605"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="b51909636ec480c8" type="revolute">
+		<origin xyz="0.0 0.296890064168 0.0" rpy="0 0 0"></origin>
+		<parent link="b5190963"></parent>
+		<child link="6ec480c8"></child>
+		<limit velocity="0.117704652072" lower="-1.9" upper="0.0379795368137" effort="0.376926836267"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="6ec480c8d63c789b" type="revolute">
+		<origin xyz="0.0 -0.000351354843484 0.0" rpy="0 0 0"></origin>
+		<parent link="6ec480c8"></parent>
+		<child link="d63c789b"></child>
+		<limit velocity="0.416836502422" lower="-1.9" upper="0.263953655824" effort="0.692193661504"></limit>
+		<type>revolute</type>
+		<axis xyz="0 1 0"></axis>
+	</joint>
+	<joint name="d63c789b413041c7" type="revolute">
+		<origin xyz="0.0 0.0184764451506 0.0" rpy="0 0 0"></origin>
+		<parent link="d63c789b"></parent>
+		<child link="413041c7"></child>
+		<limit velocity="0.495129841063" lower="-1.9" upper="0.169053180115" effort="0.0562923070372"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="413041c7e68ff6a4" type="revolute">
+		<origin xyz="0.0 0.106878170724 0.0" rpy="0 0 0"></origin>
+		<parent link="413041c7"></parent>
+		<child link="e68ff6a4"></child>
+		<limit velocity="0.00323336652077" lower="-1.9" upper="0.654849995196" effort="0.0770955344402"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="e68ff6a405fb6450" type="revolute">
+		<origin xyz="0.0 -0.160221870822 0.0" rpy="0 0 0"></origin>
+		<parent link="e68ff6a4"></parent>
+		<child link="05fb6450"></child>
+		<limit velocity="0.482212154929" lower="-1.9" upper="0.28871898528" effort="0.952429653087"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="05fb645087d7940f" type="revolute">
+		<origin xyz="0.0 -0.0080074759284 0.0" rpy="0 0 0"></origin>
+		<parent link="05fb6450"></parent>
+		<child link="87d7940f"></child>
+		<limit velocity="1.05859227301" lower="-1.9" upper="0.118858956421" effort="0.362596929965"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="87d7940f3da6150c" type="revolute">
+		<origin xyz="0.0 -0.0444796676004 0.0" rpy="0 0 0"></origin>
+		<parent link="87d7940f"></parent>
+		<child link="3da6150c"></child>
+		<limit velocity="0.0432701746453" lower="-1.9" upper="0.108436483346" effort="0.248115820582"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="3da6150c70a813a7" type="revolute">
+		<origin xyz="0.0977121751532 0.0 0.0" rpy="0 0 0"></origin>
+		<parent link="3da6150c"></parent>
+		<child link="70a813a7"></child>
+		<limit velocity="0.08895214737" lower="-1.9" upper="0.0819521360715" effort="0.142466965312"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="70a813a77890965f" type="revolute">
+		<origin xyz="0.180373033082 0.0 0.0" rpy="0 0 0"></origin>
+		<parent link="70a813a7"></parent>
+		<child link="7890965f"></child>
+		<limit velocity="0.319225240367" lower="-1.9" upper="0.452427880046" effort="0.209822824673"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="7890965f7d2f91e4" type="revolute">
+		<origin xyz="0.0 -0.0227442211358 0.0" rpy="0 0 0"></origin>
+		<parent link="7890965f"></parent>
+		<child link="7d2f91e4"></child>
+		<limit velocity="0.496143208028" lower="-1.9" upper="0.965562611806" effort="0.456445009719"></limit>
+		<type>revolute</type>
+		<axis xyz="0 1 0"></axis>
+	</joint>
+	<joint name="7d2f91e483cccbd2" type="revolute">
+		<origin xyz="0.0 -0.107914655121 0.0" rpy="0 0 0"></origin>
+		<parent link="7d2f91e4"></parent>
+		<child link="83cccbd2"></child>
+		<limit velocity="0.312047690829" lower="-1.9" upper="0.136554408429" effort="1.16324054574"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="83cccbd29b5bd92e" type="revolute">
+		<origin xyz="-0.0724202115472 0.0 0.0" rpy="0 0 0"></origin>
+		<parent link="83cccbd2"></parent>
+		<child link="9b5bd92e"></child>
+		<limit velocity="0.41306019182" lower="-1.9" upper="0.546211899938" effort="1.61402201093"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="9b5bd92e64c6f495" type="revolute">
+		<origin xyz="0.0 -0.067132646337 0.0" rpy="0 0 0"></origin>
+		<parent link="9b5bd92e"></parent>
+		<child link="64c6f495"></child>
+		<limit velocity="0.0667382953089" lower="-1.9" upper="0.0270449108059" effort="0.467977716796"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="64c6f495275c27f4" type="revolute">
+		<origin xyz="0.0 0.0 -0.151876556298" rpy="0 0 0"></origin>
+		<parent link="64c6f495"></parent>
+		<child link="275c27f4"></child>
+		<limit velocity="0.520221925372" lower="-1.9" upper="0.0760317740144" effort="0.0757735697141"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="275c27f4d78aac32" type="revolute">
+		<origin xyz="0.0 -0.072733274844 0.0" rpy="0 0 0"></origin>
+		<parent link="275c27f4"></parent>
+		<child link="d78aac32"></child>
+		<limit velocity="0.430679895929" lower="-1.9" upper="0.385846507638" effort="0.0503900214603"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="d78aac32105cdbe8" type="revolute">
+		<origin xyz="0.0 0.236723511144 0.0" rpy="0 0 0"></origin>
+		<parent link="d78aac32"></parent>
+		<child link="105cdbe8"></child>
+		<limit velocity="0.155432521834" lower="-1.9" upper="0.29564136956" effort="0.729112972127"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="105cdbe89cdb5009" type="revolute">
+		<origin xyz="-0.0480505025842 0.0 0.0" rpy="0 0 0"></origin>
+		<parent link="105cdbe8"></parent>
+		<child link="9cdb5009"></child>
+		<limit velocity="0.646667427174" lower="-1.9" upper="0.732582262505" effort="0.853951852164"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="9cdb5009954daca0" type="revolute">
+		<origin xyz="0.0 -0.0677195858122 0.0" rpy="0 0 0"></origin>
+		<parent link="9cdb5009"></parent>
+		<child link="954daca0"></child>
+		<limit velocity="1.05138691724" lower="-1.9" upper="0.341737776897" effort="0.286404521279"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="954daca0982855a3" type="revolute">
+		<origin xyz="0.0 0.115377989296 0.0" rpy="0 0 0"></origin>
+		<parent link="954daca0"></parent>
+		<child link="982855a3"></child>
+		<limit velocity="0.350787041946" lower="-1.9" upper="1.9" effort="0.923371919085"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="982855a3726e66ea" type="revolute">
+		<origin xyz="0.0 0.0 -0.0154031405075" rpy="0 0 0"></origin>
+		<parent link="982855a3"></parent>
+		<child link="726e66ea"></child>
+		<limit velocity="0.673824204898" lower="-1.9" upper="0.947139027845" effort="0.590223233034"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="726e66ea0443cef8" type="revolute">
+		<origin xyz="-0.0132225166836 0.0 0.0" rpy="0 0 0"></origin>
+		<parent link="726e66ea"></parent>
+		<child link="0443cef8"></child>
+		<limit velocity="0.375509633371" lower="-1.9" upper="0.31033780141" effort="0.966661265437"></limit>
+		<type>revolute</type>
+		<axis xyz="0 1 0"></axis>
+	</joint>
+	<joint name="0443cef8591f5e18" type="revolute">
+		<origin xyz="-0.131795017515 0.0 0.0" rpy="0 0 0"></origin>
+		<parent link="0443cef8"></parent>
+		<child link="591f5e18"></child>
+		<limit velocity="0" lower="-1.9" upper="1.9" effort="0.137300350857"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="591f5e180cdc028b" type="revolute">
+		<origin xyz="0.0 0.0 0.2" rpy="0 0 0"></origin>
+		<parent link="591f5e18"></parent>
+		<child link="0cdc028b"></child>
+		<limit velocity="0" lower="-1.9" upper="1.9" effort="0.963560720648"></limit>
+		<type>revolute</type>
+		<axis xyz="0 0 1"></axis>
+	</joint>
+	<joint name="0cdc028bbb90fee0" type="revolute">
 		<origin xyz="0.0 0.2 0.0" rpy="0 0 0"></origin>
-		<parent link="a9a6fc60"></parent>
-		<child link="67b3bdd6"></child>
+		<parent link="0cdc028b"></parent>
+		<child link="bb90fee0"></child>
 		<limit velocity="0" lower="-1.9" upper="1.9" effort="0"></limit>
 		<type>revolute</type>
 		<axis xyz="0 0 1"></axis>

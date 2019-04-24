@@ -138,6 +138,7 @@ def evaluate(inputStr, headless=True):
             v = p.getBaseVelocity(boxId)[0]
             velocities.append(v)
             p.setJointMotorControl2(boxId, j, p.VELOCITY_CONTROL, targetVelocity=direction, force=math.fabs(f))
+            
 
     cubePos, cubeOrn = p.getBasePositionAndOrientation(boxId)
     # result = measureDistance(cubePos)

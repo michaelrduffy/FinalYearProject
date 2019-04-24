@@ -28,7 +28,7 @@ key = -1
 obj = {}
 
 def translate_char(char, idx, params=None):
-    OBJ_PARAMS = ["x", "y", "z", "mass"]
+    OBJ_PARAMS = ["x", "y", "z", ""]
     initScale = 0.2
     cube = json.loads("""
           {
@@ -90,12 +90,15 @@ def translate_char(char, idx, params=None):
                 toChange = OBJ_PARAMS[foo]
                 if toChange == "x":
                     x = initScale * float(p)
+                    temp["inertial"]["mass"]["@value"] = float(temp["inertial"]["mass"]["@value"]) * float(p)
                     dimensions[0] = x
                 elif toChange == "y":
                     y = initScale * float(p)
+                    temp["inertial"]["mass"]["@value"] = float(temp["inertial"]["mass"]["@value"]) * float(p)
                     dimensions[1] = y
                 elif toChange == "z":
                     z = initScale * float(p)
+                    temp["inertial"]["mass"]["@value"] = float(temp["inertial"]["mass"]["@value"]) * float(p)
                     dimensions[2] = z
                 elif toChange == "mass":
                     temp["inertial"]["mass"]["@value"] = float(p)
@@ -141,7 +144,8 @@ def make_joint(parent, child, childobj, params=None, num=0):
             "origin": {
               "@rpy": "0 0 0",
               "@xyz": "0.1 0.0 0.0"
-            }
+            },
+            "phase" : 0
           }
     """)
     temp = joint.copy()

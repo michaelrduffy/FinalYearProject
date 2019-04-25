@@ -10,6 +10,12 @@ import redis
 import random
 import parser
 from elasticsearch import Elasticsearch
+
+from yaml import load, dump
+try:
+    from yaml import CLoader as Loader, CDumper as Dumper
+except ImportError:
+    from yaml import Loader, Dumper
 #Recusively find links:
 # - Find previous [:
   # Go back through lstring
@@ -18,9 +24,10 @@ from elasticsearch import Elasticsearch
 #Programmatically find edges of blocks:
 #Origin + Width/2
 BRANCH_TERMINATORS = ['[', ']']
-r = redis.Redis(host='192.168.0.9', port=6379, db=0)
-resultsDb = redis.Redis(host='192.168.0.9', port=6379, db=1)
-es = Elasticsearch({'host':'192.168.9.0'})
+conf = load(open('conf.yml','r'), Loader=Loader)
+r = redis.Redis(host=conf['redis'], port=6379, db=0)
+resultsDb = redis.Redis(host=conf['redis'], port=6379, db=1)
+es = Elasticsearch({'host':conf['elasticsearch']})
 out = None
 key = -1
 obj = {}

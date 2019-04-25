@@ -7,9 +7,7 @@ import math
 import os
 import pickle
 import binascii
-import redis
 import random
-from elasticsearch import Elasticsearch
 #Recusively find links:
 # - Find previous [:
   # Go back through lstring
@@ -21,9 +19,6 @@ BRANCH_TERMINATORS = ['[', ']']
 PARAM_STARTS = ['(', '{']
 PARAM_ENDS = [')', '}']
 
-r = redis.Redis(host='192.168.0.9', port=6379, db=0)
-resultsDb = redis.Redis(host='192.168.0.9', port=6379, db=1)
-es = Elasticsearch({'host':'192.168.0.9'})
 out = None
 key = -1
 obj = {}

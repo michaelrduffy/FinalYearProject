@@ -1,0 +1,3 @@
+redis: 192.168.0.9
+elasticsearch: 192.168.0.9
+kibana: 192.168.0.9

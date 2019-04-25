@@ -5,6 +5,12 @@ import random
 import time
 import string
 
+from yaml import load, dump
+try:
+    from yaml import CLoader as Loader, CDumper as Dumper
+except ImportError:
+    from yaml import Loader, Dumper
+
 from datetime import datetime
 from elasticsearch import Elasticsearch
 
@@ -71,12 +77,13 @@ def iterate(gen, Id):
             robotDict = {"string": mutator.update(x), "status":"todo"}
             r.hmset(generateKey(), robotDict)
 
+conf = load(open('conf.yml','r'), Loader=Loader)
 numGenerations = 20
 generationSize = 100
-es = Elasticsearch(['192.168.0.9'])
+es = Elasticsearch([conf['elasticsearch']])
 runId = runId()
-r = redis.Redis(host='192.168.0.9', port=6379, db=0)
-resultsDb = redis.Redis(host='192.168.0.9', port=6379, db=1)
+r = redis.Redis(host=conf['redis'], port=6379, db=0)
+resultsDb = redis.Redis(host=conf['redis'], port=6379, db=1)
 print "RunId: " +runId
 r.flushdb()
 resultsDb.flushdb()

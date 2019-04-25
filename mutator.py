@@ -1,8 +1,15 @@
 import redis
 import random
 import re
+from yaml import load, dump
+try:
+    from yaml import CLoader as Loader, CDumper as Dumper
+except ImportError:
+    from yaml import Loader, Dumper
+
 #Take in robot
-r = redis.Redis(host='192.168.0.9', port=6379, db=0)
+conf = load(open('conf.yml','r'), Loader=Loader)
+r = redis.Redis(host=conf['redis'], port=6379, db=0)
 
 BRANCH_TERMINATORS = ['[', ']']
 PARAM_STARTS = ['(', '{']

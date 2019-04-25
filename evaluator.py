@@ -136,7 +136,6 @@ def evaluate(inputStr, headless=True):
         test = f.read()
         temp = xml.parse(test)
         if temp['robot'].has_key('joint'):
-
             if type(temp['robot']['joint']) == list:
                 phases = [{foo['@name'] : foo['phase']} for foo in temp['robot']['joint']]
             else:

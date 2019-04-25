@@ -5,6 +5,7 @@ import time
 import pybullet_data
 import math
 import os
+import pickle
 import binascii
 import redis
 import random
@@ -118,7 +119,7 @@ def translate_char(char, idx, params=None):
 def make_joint(parent, child, childobj, params=None, num=0):
     if num > 0:
         num = num % 6
-    JOINT_PARAMS = ["axis", "effort", "velocity", "upper", "lower"]
+    JOINT_PARAMS = ["axis", "effort", "velocity", "phase", "upper", "lower"]
     dimensions = childobj["collision"]["geometry"]["box"]["@size"].split(' ')
     dimensions = [float(d) for d in dimensions]
 
@@ -213,6 +214,8 @@ def make_joint(parent, child, childobj, params=None, num=0):
                 temp["limit"]["@upper"] = float(p)
             elif toChange == "lower":
                 temp["limit"]["@lower"] = float(p)
+            elif toChange == "phase":
+                temp["phase"] = float(p) * math.pi
     return temp
 
 #Read string char by char

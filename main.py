@@ -61,6 +61,7 @@ def iterate(gen, Id):
     split = generationSize/2 if generationSize % 2 == 0 else (generationSize + 1)/2
     rankings = sorted(rankings)[split:]
     print rankings
+    print sortedResults
     nextGen = [sortedResults[rank] for rank in rankings]
     #Create next generation
     if gen != numGenerations-1:
@@ -70,8 +71,7 @@ def iterate(gen, Id):
             robotDict = {"string": mutator.update(x), "status":"todo"}
             r.hmset(generateKey(), robotDict)
 
-
-numGenerations = 10000
+numGenerations = 20
 generationSize = 100
 es = Elasticsearch(['192.168.0.9'])
 runId = runId()

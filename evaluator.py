@@ -67,8 +67,8 @@ def calcForceCos():
     val = math.cos((time.time())) * 10
     return val
 
-def calcForce():
-    val = math.sin((time.time())) * 10
+def calcForce(phase=0):
+    val = math.sin((time.time()*phase)) * 10
     return val
 
 def measureDistance(pos):
@@ -124,21 +124,33 @@ def evaluate(inputStr, headless=True):
     cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
     boxId = None
     boxId = p.loadURDF(name,cubeStartPos, cubeStartOrientation)
+    phases = []
+    with open("robot.urdf", "r") as f:
+        test = f.read()
+        temp = xml.parse(test)
+        if temp['robot'].has_key('joint'):
+
+            if type(temp['robot']['joint']) == list:
+                phases = [{foo['@name'] : foo['phase']} for foo in temp['robot']['joint']]
+            else:
+                phases = [{temp['robot']['joint']['@name'] : temp['robot']['joint']['phase']}]
     velocities = []
-    stepCount = 3000
+    jointInfo = [p.getJointInfo(boxId, foo) for foo in range(p.getNumJoints(boxId))]
+    ids = [foo.keys()[0] for foo in phases]
+
+    stepCount = 5000
     for i in range (stepCount):
         p.stepSimulation()
         f = calcForce()
         for j in range(p.getNumJoints(boxId)):
-            if j % 2 == 0:
-                f = calcForce()
-            else:
-                f = calcForceCos()
+            jointPhase = 0
+            for phase in phases:
+                if jointInfo[j][1] == phase.keys()[0]:
+                    jointPhase = float(phase.values()[0])
+
+            f = calcForce(jointPhase)
             direction = speed if f >= 0 else  speed * -1
-            v = p.getBaseVelocity(boxId)[0]
-            velocities.append(v)
             p.setJointMotorControl2(boxId, j, p.VELOCITY_CONTROL, targetVelocity=direction, force=math.fabs(f))
-            
 
     cubePos, cubeOrn = p.getBasePositionAndOrientation(boxId)
     # result = measureDistance(cubePos)

@@ -140,7 +140,7 @@ def mutate(robot):
             foo = float(p)
             multiplier = 1 + (random.sample([-1,1],1)[0] * random.uniform(0, 0.2))
             newParams.append(str(foo * multiplier))
-        if len(temp) < 4 and random.randrange(100) > 60:
+        if len(temp) < 3 and random.randrange(100) > 60:
             newParams.append(random.random())
         robot.setObjParams(newParams)
     elif random.randrange(100) > 60:
@@ -152,7 +152,7 @@ def mutate(robot):
             foo = float(p)
             multiplier = 1 + (random.sample([-1,1],1)[0] * random.uniform(0, 0.2))
             newParams.append(str(foo * multiplier))
-        if len(temp) < 4 and random.randrange(100) > 60:
+        if len(temp) < 5 and random.randrange(100) > 60:
             newParams.append(random.random())
         robot.setJointParams(newParams)
     elif random.randrange(100) > 60:

@@ -37,8 +37,9 @@ def calcForceCos():
     val = math.cos((time.time())) * 10
     return val
 
-def calcForce():
-    val = math.sin((time.time())) * 10
+def calcForce(phase=0):
+
+    val = math.sin((time.time()*phase)) * 10
     return val
 
 def measureDistance(pos):
@@ -94,19 +95,26 @@ def evaluate(inputStr, headless=True):
     cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
     boxId = None
     boxId = p.loadURDF(name,cubeStartPos, cubeStartOrientation)
+    with open("robot.urdf", "r") as f:
+        test = f.read()
+        temp = xml.parse(test)
+        phases = [{foo['@name'] :foo['phase']} for foo in temp['robot']['joint']]
     velocities = []
+    jointInfo = [p.getJointInfo(boxId, foo) for foo in range(p.getNumJoints(boxId))]
+    ids = [foo.keys()[0] for foo in phases]
+
     stepCount = 30000
     for i in range (stepCount):
         p.stepSimulation()
         f = calcForce()
         for j in range(p.getNumJoints(boxId)):
-            if j % 2 == 0:
-                f = calcForce()
-            else:
-                f = calcForceCos()
+            jointPhase = 0
+            for phase in phases:
+                if jointInfo[j][1] == phase.keys()[0]:
+                    jointPhase = float(phase.values()[0])
+
+            f = calcForce(jointPhase)
             direction = speed if f >= 0 else  speed * -1
-            v = p.getBaseVelocity(boxId)[0]
-            velocities.append(v)
             p.setJointMotorControl2(boxId, j, p.VELOCITY_CONTROL, targetVelocity=direction, force=math.fabs(f))
 
 
@@ -118,5 +126,5 @@ def evaluate(inputStr, headless=True):
 
     return result
 
-testRobot = 'F{0.0726458923378 0.0600170558428 0.314057799853 0.411015160035}(0.341207171124 0.499099023995 0.738599451703 3.13755017146)[F{0.820816651506 0.278738621582 73.458478249 0.272362756109}(0.231917878423 0.420992724841 0.275109006267 0.414710442446)[,,F{0.0571422971879 0.096995791126 0.49890453027 0.084657221213}(0.0652296257035 0.0687225718365 0.127551461775 2.16932125434)[,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,],,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,],,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,]'
+testRobot = 'F{0.0726458923378 0.0600170558428 0.314057799853 0.411015160035}(0.341207171124 0.499099023995 0.738599451703 3.13755017146 1.0 2.0)[F{0.820816651506 0.278738621582 73.458478249 0.272362756109}(0.231917878423 0.420992724841 0.275109006267 0.414710442446)[,,F{0.0571422971879 0.096995791126 0.49890453027 0.084657221213}(0.0652296257035 0.0687225718365 0.127551461775 2.16932125434)[,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,],,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,],,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,]'
 evaluate(testRobot, False)
